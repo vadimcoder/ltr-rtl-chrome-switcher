@@ -1,0 +1,19 @@
+{
+  "name": "ltr-rtl-chrome-switcher",
+  "description": "ltr-rtl-chrome-switcher",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "extension-interface.html"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "commands": {
+    "toggleDirection": {
+      "suggested_key": "Alt+Shift+A",
+      "description": "Toggle HTML dir attribute ltr/rtl"
+    }
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  }
+}
