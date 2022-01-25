@@ -1,6 +1,6 @@
 {
-  "name": "ltr-rtl-chrome-switcher",
-  "description": "ltr-rtl-chrome-switcher",
+  "name": "intl-switcher",
+  "description": "intl-switcher",
   "version": "1.0",
   "manifest_version": 3,
   "action": {

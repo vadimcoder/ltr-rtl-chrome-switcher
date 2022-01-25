@@ -1,20 +1,34 @@
-async function toggleDirection() {
-  let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+function execute(payload) {
+  return async function () {
+    let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
 
-  chrome.scripting.executeScript({
-    target: {tabId: tab.id},
-    function: () => {
-      // The body of this function will be executed as a content script inside the current page
-
-      if (document.documentElement.dir === "" || document.documentElement.dir === "ltr") {
-        document.documentElement.dir = "rtl";
-      } else {
-        document.documentElement.dir = "ltr";
-      }
-    },
-  });
+    chrome.scripting.executeScript({
+      target: {tabId: tab.id},
+      function: payload
+    });
+  }
 }
 
-toggleHtmlDirButton.addEventListener("click", toggleDirection);
+intlSwitcher_direction.addEventListener("click", execute(() => {
+  const {style} = document.body;
 
-toggleDirection();
+  if (style.direction === "" || style.direction === "ltr") {
+    document.body.style.direction = "rtl";
+  } else {
+    document.body.style.direction = "ltr";
+  }
+}));
+
+intlSwitcher_writingModeHorizontalTb.addEventListener("click", execute(() => {
+  document.body.style.writingMode = "horizontal-tb";
+}));
+
+intlSwitcher_writingModeVerticalLrRl.addEventListener("click", execute(() => {
+  const {style} = document.body;
+
+  style.writingMode = style.writingMode === "vertical-lr" ? "vertical-rl" : "vertical-lr";
+}));
+
+intlSwitcher_writingModeInherit.addEventListener("click", execute(() => {
+  document.body.style.writingMode = "initial";
+}));
