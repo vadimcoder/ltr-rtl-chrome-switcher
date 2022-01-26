@@ -10,12 +10,12 @@ function execute(payload) {
 }
 
 intlSwitcher_direction.addEventListener("click", execute(() => {
-  const {style} = document.body;
+  const container = document.querySelector(".rtl-container-for-chrome") ?? document.body;
 
-  if (style.direction === "" || style.direction === "ltr") {
-    document.body.style.direction = "rtl";
+  if (container.style.direction === "" || container.style.direction === "ltr") {
+    container.style.direction = "rtl";
   } else {
-    document.body.style.direction = "ltr";
+    container.style.direction = "ltr";
   }
 }));
 
